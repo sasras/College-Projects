@@ -1,0 +1,14 @@
+
+public class World
+{
+	Point2D [] suspects = new Point2D[8];
+	PatrolCar police = new PatrolCar();
+	public static int SIZE = 9;
+
+	
+	public World()
+	{
+		
+	}
+	
+}

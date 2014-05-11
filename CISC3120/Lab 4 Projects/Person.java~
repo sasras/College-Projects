@@ -1,0 +1,124 @@
+/** SHAWN SINGH			SRING 2014
+ *	CISC 3120-TR2		PROF. LI		
+ *  Lab 4			PART 2 Person
+ */
+
+public class Person
+{
+	private Point2D location = new Point2D();
+
+	public Person()
+	{
+		location.setX(0);
+		location.setY(0);	
+	}
+
+	public Person(int x, int y)
+	{
+		location.setX(x);
+		location.setY(y);
+	}
+	
+	//Move west
+	public boolean moveWest()
+	{
+		if(location.getX() == 0)
+		{
+			return false;
+		}
+		else
+		{
+			location.setX(location.getX()-1);
+			return true;
+		}
+	}
+
+	//Move east
+	public boolean moveEast()
+	{
+		if(location.getX() == World.SIZE)
+		{
+			return false;
+		}
+		else 
+		{
+			location.setX(location.getX() + 1);
+			return true;
+		}	
+	}
+	
+	//Move north
+	public boolean moveNorth()
+	{
+		if(location.getY() == 0)
+		{
+			return false;
+		}
+		else
+		{
+			location.setY(location.getY() - 1);
+			return true;
+		}	
+	}
+	
+	//Move south
+	public boolean moveSouth()
+	{
+		if(location.getY() == World.SIZE)
+		{
+			return false;
+		}
+		else
+		{
+			location.setY(location.getY() + 1);
+			return true;
+		}	
+	}
+
+	public boolean move(int direction)
+	{
+		if(direction == World.EAST)
+		{
+			return moveEast();
+		}
+		else if(direction == World.WEST)
+		{
+			return moveWest();
+		}
+		else if(direction == World.SOUTH)
+		{
+			return moveSouth();
+		}
+		else if(direction == World.NORTH)
+		{
+			return moveNorth();
+		}
+		else
+		{
+			System.out.println("Not a valid input");
+			return false;
+		}
+	}
+
+	public Point2D getLocation()
+	{
+		return location;	
+	}
+
+	public void setLocation(int a, int b)
+	{
+		location.setX(a);
+		location.setY(b);
+	}
+
+	public String toString()
+	{
+		return location.toString();
+	}
+	
+	public int compareTo(Person persons)
+	{
+		return this.location.compareTo(persons.location);
+		
+	}
+}

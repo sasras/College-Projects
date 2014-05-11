@@ -1,0 +1,47 @@
+/** SHAWN SINGH			SRING 2014
+ *	CISC 3120-TR2		PROF. LI		
+ *  Lab 1.2 PART 2 Command Line Calculator
+ */
+import java.util.Scanner;
+import java.io.Console;
+public class Calc
+{
+    public static void main(String [] args)
+	{
+		System.out.print("Enter Command op num1 num2:");
+		Scanner keyboard = new Scanner(System.in);
+		String operation = keyboard.next();
+		int num1 = keyboard.nextInt();
+		int num2 = keyboard.nextInt();
+		System.out.println("The answer is: " + compute(operation,num1,num2));
+	}
+	
+	/* This method accepts a string and two numbers and then goes
+ * 	through a series of conditonal statements to compute the 
+ * 	necessary operation*/
+	public static int compute(String op, int number1, int number2)
+	{
+		int answer = 0;
+		if(op.charAt(0) == '+')
+		{
+			answer  = number1 + number2;
+		}
+		else if(op.charAt(0) == '-')
+		{
+			answer = number1 - number2;
+		}
+		else if(op.charAt(0) == 'x')
+		{
+			answer = number1 * 	number2;
+		}
+		else if(op.charAt(0) == '/')
+		{
+			answer = number1 / number2;
+		}
+		else
+		{
+			System.out.print("Error");
+		}
+		return answer;
+	}
+}

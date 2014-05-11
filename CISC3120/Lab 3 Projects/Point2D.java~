@@ -1,0 +1,71 @@
+/** SHAWN SINGH			SRING 2014
+ *	CISC 3120-TR2		PROF. LI		
+ *  Lab 3			PART 1 Point2D
+ */
+
+public class Point2D
+{
+	private int x;
+	private int y;
+
+	public Point2D()
+	{
+		x = 0;
+		y = 0;
+	}
+	
+	public Point2D(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+
+	}
+	
+	public void setX(int theX)
+	{
+		x = theX;
+	}
+	
+	public void setY(int theY)
+	{
+		y = theY;
+	}
+
+	public int getX()
+	{
+		return x;
+	}
+
+	public int getY()
+	{
+		return y;
+	}
+	
+	public String toString()
+	{
+		String position;
+		position = ("(" + getX() + "," + getY() + ")");
+		return position;
+	}
+	
+	public int compareTo(Point2D point2D)
+	{
+		if(this.x == point2D.getX() && this.y == point2D.getY())
+			return 0;
+		else
+			return -1;
+	}
+
+	public static void main(String [] args)
+	{
+		Point2D pobj = new Point2D();
+		pobj.setX(8);
+		pobj.setY(2);
+		System.out.println(pobj.toString());
+		System.out.println(pobj.getX());
+		System.out.println(pobj.getY());
+		
+	}
+	
+	
+}

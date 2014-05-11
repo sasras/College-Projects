@@ -1,0 +1,16 @@
+/** SHAWN SINGH			SRING 2014
+ *	CISC 3120-TR2		PROF. LI		
+ *  Lab 3				PART 3 World
+ */
+import java.util.Random;
+public class World
+{
+	public static int SIZE = 9;
+	public static int EAST = 0;
+	public static int WEST = 1;
+	public static int NORTH = 2;
+	public static int SOUTH =3;
+	public static int SIZE = 9;
+
+	
+}

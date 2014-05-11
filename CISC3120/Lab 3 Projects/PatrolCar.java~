@@ -1,0 +1,87 @@
+/** SHAWN SINGH			SRING 2014
+ *	CISC 3120-TR2		PROF. LI		
+ *  Lab 3			PART 1 Patrol Car
+ */
+
+public class PatrolCar
+{
+	static int id =0;
+	Point2D location = new Point2D();
+	private int arrested = 0;
+	
+	public PatrolCar()
+	{
+		id += 1;
+		arrested = 0;
+		location.setX(0);
+		location.setY(0);
+	}
+
+	public boolean moveWest()
+	{
+		if(location.getX() == 0)
+		{
+			location.setX(location.getX() -1);
+			return false;
+		}
+		else
+		return true;
+	}
+
+	public boolean moveEast()
+	{
+		if(location.getX() == World.SIZE)
+		{
+			location.setX(location.getX() + 1);
+			return false;
+		}
+		else 
+		return true;
+	}
+
+	public boolean moveNorth()
+	{
+		if(location.getY() == 0)
+		{
+			location.setY(location.getY() - 1);
+			return false;
+		}
+		else
+		return true;
+	}
+	
+	public boolean moveSouth()
+	{
+		if(location.getY() == World.SIZE)
+		{
+			location.setY(location.getY() + 1);
+			return false;
+		}
+		else
+		return true;
+	}
+
+	public int getId()
+	{
+		return id;
+	}
+
+	public Point2D getLocation()
+	{
+		return location; // problem here, how to return two ints.
+	}
+
+	public int getNumSuspectsArrested()
+	{
+		return arrested;
+	}
+
+	public String toString()
+	{
+		String position;
+		position = ("location: " + location.toString() + "arrested: " + getNumSuspectsArrested());
+		return position;
+	}	
+
+	
+}

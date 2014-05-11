@@ -1,0 +1,36 @@
+import java.util.Scanner;
+import java.io.*;
+
+public class CoinFlip
+{
+	public static void main(String [] args)
+	{
+		int userInput = 0;
+		Scanner keyboard =  new Scanner(System.in);
+		boolean t;
+		
+		
+		System.out.println("Enter a 0 for heads and a 1 for tails to perform a coin flip");
+		
+		try
+		{
+			userInput = Integer.parseInt(keyboard.next());
+			
+			while(userInput != Coin.HEADS && userInput != Coin.TAILS)
+			{
+				System.out.print("Enter Valid Number ");
+				userInput = Integer.parseInt(keyboard.next());	
+			}
+			System.out.println(userInput);
+				
+					
+		}
+		catch(NumberFormatException e)
+		{
+			System.out.println("Not a number. Goodbye");
+			System.exit(0);
+		}
+		
+
+	}
+}

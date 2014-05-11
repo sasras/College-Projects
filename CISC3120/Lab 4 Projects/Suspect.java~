@@ -1,0 +1,74 @@
+/** SHAWN SINGH			SRING 2014
+ *	CISC 3120-TR2		PROF. LI		
+ *  Lab 4			PART 3 Suspect
+ */
+import java.util.Random;
+public class Suspect extends Person
+{
+	static int count;
+	private int id;
+	private boolean arrested;
+	private int money;
+	Random numbers = new Random();
+
+	public Suspect()
+	{
+		super.setLocation(numbers.nextInt(World.SIZE +1),numbers.nextInt(World.SIZE + 1));
+		count++;
+		id = count;
+		arrested = false;
+		money = 0;
+		
+	}
+	
+	public int getId()
+	{
+		return id;
+	}
+
+	public boolean isArrested()
+	{
+		return arrested;
+	}
+
+	public void caught()
+	{
+		arrested = true;
+		super.getLocation().setX(-1);
+		super.getLocation().setY(-1);
+	}
+
+	public void rob()
+	{
+		money =+ 10;
+	}
+
+	public String toString()
+	{
+		String output;
+		output = ("Id: " + getId() + " Location: " + super.toString() + " Money: " + money + " Arrested: " + isArrested());
+		return output;
+	}
+
+	public static void main(String [] args)
+	{
+		Suspect guy = new Suspect();
+		System.out.println(guy.toString());;
+	}
+	
+	public int compareto(Suspect suspect)
+	{
+		if(this.getId() == suspect.getId())
+		{
+			return 0;
+		}
+		else if(this.getId() > suspect.getId())
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+}
