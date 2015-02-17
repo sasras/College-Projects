@@ -14,8 +14,8 @@ public class WordGame
 	private String [] word ={"program","business","art","science","bad","food",
 			"accommodation","batman"}; //Array of guess words.
 	private String guessWrd; //The guess word or answer to the game.
-	private char [] blanks; //To hold the asterisks or blank spaces of the guess word.
-	private char [] tracker;//An array that will be used to keep track of every letter entered.
+	private char [] blanks; //To hold the blank spaces of the guess word.
+	private char [] tracker;//Array will be used to keep track of letters entered.
 	
 	/*The constructor runs the method to play the game.*/
 	public WordGame()
@@ -23,16 +23,16 @@ public class WordGame
 		playGame();
 	}
 	
-	/*This method contains all the logic and mechanisms which will be used in the game.*/
+	/*Method contains all the logic used to play the game.*/
 	public void playGame()
 	{
 		/*Initialization of the variables needed.*/
-		boolean playing = true; //Boolean to represent the state the game is in.
-		int wrongCount = 0;//To count how much times the user guessed a wrong letter.
-		int tCount = 0; //To keep track of how much times the user typed a key.
-		tracker = new char[26]; //tracker initialized to size of 26, representing #of letters in alphabet.
+		boolean playing = true; //Represent the state the game is in.
+		int wrongCount = 0;//Count how much times the user guessed a wrong.
+		int tCount = 0; //Keep track of how much times the user typed a key.
+		tracker = new char[26]; //Initialized to 26.(letters in alphabet).
 		char usrInp = ' '; //This will hold the user's input.
-		getRandWord(); //Get a random word, which will be the guess word.
+		getRandWord(); //Get a random guess word.
 		
 		while(playing == true && usrInp != '%')
 		{
@@ -59,10 +59,11 @@ public class WordGame
 			tCount++; //Upon receiving valid input, increase tracker count.
 			tracker[tCount] = usrInp; //Place user input into the tracker array.
 			
-			/*The 'indexof' method will check to see if the user's input letter exist within
-			 * the guess word.If user input letter is in the guess word the value would return
-			 * the index for where that letter is in the guess word.(It would be between 0 and 
-			 * the length of the guess word.)*/
+			/*The 'indexof' method will check to see if the user's input 
+			 * letter exist within the guess word.If user input letter 
+			 * is in the guess word the value would return the index for 
+			 * where that letter is in the guess word.(It would be between 
+			 * 0 and the length of the guess word.)*/
 			if(guessWrd.indexOf(usrInp) >= 0)
 			{
 				for(int i = 0; i < guessWrd.length(); i++)
