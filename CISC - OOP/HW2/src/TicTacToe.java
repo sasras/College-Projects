@@ -1,10 +1,10 @@
 /** SHAWN SINGH			SRING 2015
  *	CISC 3150-TR2		PROF. Rudowsky	
- *  HW#2				Tic Tac Toe
+ *  HW#2				TicTacToe
  */
 
 /*The following class contains the methods for
- * playing a game of Tic Tac Toe.This class also contains
+ * playing a game of TicTacToe.This class also contains
  * the main method necessary to run the game.*/
 
 import java.util.Scanner;
@@ -42,12 +42,12 @@ public class TicTacToe
 			usrRow = getInput(); //Get user row input.
 			System.out.print("Enter a column (0, 1 or 2) for player " + currentPlayer
 					+ ": ");
-			usrCol= getInput(); //Get user column input
+			usrCol= getInput(); //Get user column input.
 			
-			/*Check to see user input space on board is free or if input is valid*/
-			while(checkMove(usrRow, usrCol) == false)
+			/*Check to see if user's inputs is valid.*/
+			while((usrRow > gameBoard.length-1 || usrCol > gameBoard.length-1))
 			{
-				System.out.println("Invalid Input or Space already filled, please re-enter.");
+				System.out.println("Invalid Input. Please re-enter");
 				System.out.print("Enter a row (0, 1 or 2) for player " + currentPlayer
 						+ ": ");
 				usrRow = getInput();
@@ -56,34 +56,47 @@ public class TicTacToe
 				usrCol= getInput();
 			}
 			
-			/*Have to check for valid integer input*/
-			drawBoard();
+			/*Check to see user input space on board is free.*/
+			while(checkMove(usrRow, usrCol) == false)
+			{
+				System.out.println("Space already filled, please re-enter.");
+				System.out.print("Enter a row (0, 1 or 2) for player " + currentPlayer
+						+ ": ");
+				usrRow = getInput();
+				System.out.print("Enter a column (0, 1 or 2) for player " + currentPlayer
+						+ ": ");
+				usrCol= getInput();
+			}
 			
+			drawBoard();//Draw the board.
+			 
+			/*Check if any of the players have won.*/
 			if(checkWin() == true)
 			{
-				System.out.println("Player " + currentPlayer + " YOU WIN!!");
+				System.out.println("Player " + currentPlayer + " -YOU WIN!!");
 				playing = false;
 			}
+			/*Check to see if the game resulted in a draw.*/
 			else if(draw() == true)
 			{
 				System.out.println("Sorry, its a DRAW!");
 				playing = false;
 			}
 			
-			changePlayer();
+			changePlayer();//Used to change players
 		}
 	}
 	
 	/*This method uses the Scanner class to get the user input
-	 * from the keyboard and returns it as a string.*/
+	 * from the keyboard and returns it as a integer.*/
 	public int getInput()
 	{
 		Scanner input = new Scanner(System.in);
-		int usrWrd = input.nextInt();
-		return usrWrd;
+		int usrInt = input.nextInt();
+		return usrInt; 
 	}
 	
-	/*Initialize board*/ 
+	/*Initialize board with blanks.*/ 
 	public void initialize()
 	{
 		for(int i = 0; i < gameBoard.length; i++)
@@ -111,11 +124,12 @@ public class TicTacToe
 		}
 	}
 	
-	/*This method will be used to verify that the space is open.
-	 * Check if the player has won.Check if there is a draw.*/
+	/*This method verifies that the space is open or free.It
+	 * then returns a boolean.*/
 	public boolean checkMove(int row,int col)
 	{
 		boolean filled = false; //Space is empty
+		
 		if(gameBoard[row][col] == ' ')
 		{
 			gameBoard[row][col] = currentPlayer;
@@ -124,25 +138,27 @@ public class TicTacToe
 		return filled;
 	}
 	
-	/*Check to see if player has won*/
+	/*This method checks all the possibilities to see if a player has won the game
+	 * and then returns a boolean.*/
 	public boolean checkWin()
 	{
-		boolean result = false;
-		/*First check all row possibilites   */
+		boolean result = false; //Holder for the global variable.
+	
 		for(int i = 0; i < gameBoard.length; i++)
 		{
+			/*First check all row wins*/
 			if(gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][1] == gameBoard[i][2] && gameBoard[i][0] != ' ')
 			{
 				win = true;
 				result = win;
 			}
-			/*Check for columns win*/
+			/*Check for columns wins*/
 			else if(gameBoard[0][i] == gameBoard[1][i] && gameBoard[1][i] == gameBoard[2][i] && gameBoard[0][i] != ' ')
 			{
 				win = true;
 				result = win;
 			}
-			/*Check for diagonal win*/
+			/*Check for diagonal wins*/
 			else if((gameBoard[0][0] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][2] && gameBoard[0][0] != ' ') ||
 					(gameBoard[0][2] == gameBoard[1][1] && gameBoard[1][1] == gameBoard[2][0] && gameBoard[0][2] != ' '))
 			{
@@ -150,24 +166,28 @@ public class TicTacToe
 				result = win;
 			}
 		}
-		
 		return result;
 	}
 	
-	/*Check to see if there is a draw.
-	 * Here will check to see if the board is full.*/
+	/*Method will check to see if there is a draw. Here
+	 *  will check to see if the board is full.It returns 
+	 *  a boolean.*/
 	public boolean draw()
 	{
-		boolean full = false;
-		int count = 0;
+		boolean full = false; //Boolean to see if board is full.
+		/*Count used as a mechanism to get the whole iteration throughout the board.*/
+		int count = 0; 
 		for(int i = 0; i < gameBoard.length; i++)
 		{
 			for(int j = 0; j < gameBoard[i].length; j++)
 			{
+				/*Check if space is empty.*/
 				if(gameBoard[i][j] != ' ' && win == false)
 				{
 					count++;
-					if(count == 9)
+					/*Check if equal to 9 because thats all the spaces in the board.
+					 * This is found by multiplying number of rows by columns.*/
+					if(count == 9) 
 					{
 						full = true;
 					}
@@ -177,7 +197,7 @@ public class TicTacToe
 		return full;
 	}
 	
-	/*Used to change player*/
+	/*This method is used to change the player from either X or O.*/
 	public void changePlayer()
 	{
 		if(currentPlayer == 'X')
@@ -190,6 +210,8 @@ public class TicTacToe
 		}
 	}
 	
+	/*Main method of the program which creates an instance of the 
+	 * TicTacToe class which will run the game.*/
 	public static void main(String[] args)
 	{
 		TicTacToe game = new TicTacToe();
