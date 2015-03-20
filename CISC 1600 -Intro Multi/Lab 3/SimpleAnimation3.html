@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Animation 3</title>
+        <meta charset="UTF-8">
+        
+        <style type="text/css">
+            #sprite
+            {
+                /*Simple Box*/
+                position: absolute;
+                left: 0px;
+                top: 30px;
+            }
+        </style>
+        
+        <script>
+            var img0 = new Image();
+            img0.src = "images/PT_anim0000.gif";
+            
+            var img1 = new Image();
+            img1.src = "images/PT_anim0001.gif";
+            
+            var img2 = new Image();
+            img2.src = "images/PT_anim0002.gif";
+            
+            var img3 = new Image();
+            img3.src = "images/PT_anim0003.gif";
+            
+            var i = 0;
+            var nImg = 4; //The number of images.
+            var move = 5;
+            var junk;
+            var spriteObject = null; //Will use this to link to the box
+            
+            function init()
+            {
+                //get the sprite object
+                spriteObject = document.getElementById('sprite');
+                spriteObject.style.left = '0px'; //set init position to 0
+                animate();
+            }
+            
+            function animate()
+            {
+                spriteObject.style.left = parseInt(spriteObject.style.left) + move
+                + 'px';
+                document.images[0].src = eval("img" + i).src;
+                i++;
+                if(i == nImg)
+                {
+                    i = 0;
+                }
+                junk = setTimeout("animate();", 100);
+            }
+        </script>
+    </head>
+    
+    <body onload="init();">
+        
+        <div id="sprite">
+            <img src="images/PT_anim0000.gif" alt="File missing?">
+        </div>
+            
+    </body>
+</html>
