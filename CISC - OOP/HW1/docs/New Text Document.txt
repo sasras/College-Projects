@@ -1,0 +1,167 @@
+/** SHAWN SINGH			SRING 2015
+ *CISC 3150-TR2		PROF. Rudowsky	
+ *  HW#1			Word Game
+ */
+
+/*Class description of the game*/
+import java.util.Random;
+import java.util.Scanner;
+
+
+public class WordGame 
+{
+	/*Global variables to be used in this class*/
+	private String [] word ={"program","business","art","science","bad","food",
+			"accommodation","batman"}; //Array of guess words.
+	private String guessWrd; //The guess word or answer to the game.
+	private char [] blanks; //To hold the asterisks or blank spaces of the guess word.
+	private char [] tracker;//An array that will be used to keep track of every letter entered.
+	
+	/*The constructor runs the method to play the game.*/
+	public WordGame()
+	{
+		playGame();
+	}
+	
+	/*This method contains all the logic and mechanisms which will be used in the game.*/
+	public void playGame()
+	{
+		/*Initialization of the variables needed.*/
+		boolean playing = true; //Boolean to represent the state the game is in.
+		int wrongCount = 0;//To count how much times the user guessed a wrong letter.
+		int tCount = 0; //To keep track of how much times the user typed a key.
+		tracker = new char[26]; //tracker initialized to size of 26, representing #of letters in alphabet.
+		char usrInp = ' '; //This will hold the user's input.
+		getRandWord(); //Get a random word, which will be the guess word.
+		
+		while(playing == true && usrInp != '%')
+		{
+			/*Print out message to user and get the input.*/
+			System.out.print("Enter a letter in the word (% to exit): "
+					+ new String(blanks) + " ");
+			usrInp = getInput().charAt(0); //Only checks the first character of input.
+			
+			/*Checks to make sure input is a valid character.If it's not print
+			 * an error message and get input again.*/
+			while(usrInp != '%' && !(usrInp >= 'A' && usrInp <= 'z'))
+			{
+				System.out.print("Invalid input, please enter a letter only: ");
+				usrInp = getInput().charAt(0);
+			}
+			
+			/*Used as an escape to exit the game at any time.*/
+			if(usrInp == '%')
+			{
+				System.out.println("You exited the program");
+				playing = false;
+			}
+	
+			tCount++; //Upon receiving valid input, increase tracker count.
+			tracker[tCount] = usrInp; //Place user input into the tracker array.
+			
+			/*The 'indexof' method will check to see if the user's input letter exist within
+			 * the guess word.If user input letter is in the guess word the value would return
+			 * the index for where that letter is in the guess word.(It would be between 0 and 
+			 * the length of the guess word.)*/
+			if(guessWrd.indexOf(usrInp) >= 0)
+			{
+				for(int i = 0; i < guessWrd.length(); i++)
+				{
+					/*Check if user input is already been entered in the word.*/
+					if(usrInp == blanks[i]) 
+					{
+						System.out.println(usrInp + " is already in the word");
+					}
+					/*Check if user input is in the guess word.*/
+					else if(guessWrd.charAt(i) == usrInp)
+					{
+						blanks[i] = usrInp; //Replace blanks with appropriate input.
+					}
+				}
+			}
+			else
+			{
+				/*Letter has already been guessed if indexof doesn't return positive.*/
+				if(usrInp != '%')
+				{
+					System.out.println(usrInp + " is not in this word");
+					wrongCount++; //Increase wrong count.
+				}
+			}
+			
+			for(int i =0; i < tCount; i++)
+			{
+				/*Check the tracker to see if user input has already been used.*/
+				if(tracker[i] == usrInp)
+				{
+						System.out.println(usrInp+" has already been guessed");
+				}
+			}
+			
+			/*If blanks is equal to guess word then user wins the game.*/
+			if(guessWrd.equals(new String(blanks)))
+			{
+				System.out.println("You win the word was " + guessWrd.toUpperCase());
+				System.out.println("You guessed wrong " + wrongCount + " times");
+				/*Check to see if user wants to play again*/
+				System.out.print("Would you like to play again? (y/n): ");
+				usrInp = getInput().charAt(0);
+				
+				if(usrInp == 'y') //Yes play again
+				{
+					/*Reset variables again to start new game*/
+					wrongCount =0;
+					tCount =0;
+					/*Reset tracker to be empty*/
+					for(int i=0; i<tracker.length; i++)
+					{
+						tracker[i] =' ';
+					}
+					getRandWord(); //Get new random guess word
+					playing = true; //Playing is still true
+				}
+				else if(usrInp == 'n')//Don't play again
+				{
+					System.out.println("Thanks for Playing!!");
+					playing = false; //Change state of game to end loop.
+				}
+				else if(usrInp == '%') //Escape clause again.
+				{
+					System.out.println("You exited the program");
+					playing = false;
+				}
+			}
+		}
+	}
+	
+	/*This method is used to generate a random guess word.
+	 * It is also used to initialize the blanks array to be printed.*/
+	public void getRandWord()
+	{
+		Random rGen = new Random(); //Create random generator.
+		guessWrd = word[rGen.nextInt(word.length)];//Select random word from word array.
+		blanks = new char[guessWrd.length()]; //Set blanks size to guess word length.
+		/*Fill blanks array with '*'s*/
+		for(int i=0; i<guessWrd.length(); i++)
+		{
+			blanks[i] = '*';
+		}
+		
+	}
+	
+	/*This method uses the Scanner class to get the user input
+	 * from the keyboard and returns it as a string.*/
+	public String getInput()
+	{
+		Scanner input = new Scanner(System.in);
+		String usrWrd = input.next().toLowerCase();
+		return usrWrd;
+	}
+	
+	/*Main method which creates an instance of the WordGame class*/
+	public static void main(String[] args) 
+	{
+		WordGame game = new WordGame();
+	}
+ 	
+}
