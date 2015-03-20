@@ -1,5 +1,11 @@
+\#This file is used to ignore files in git.
+
+\#This ignores all bin directories
+
 **/bin/
 
+
+\#This ignores all files ending in this file tag.
 
 *.project
 
