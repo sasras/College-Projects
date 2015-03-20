@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Animation 1</title>
+        <meta charset="UTF-8">
+        <script>
+            var img0 = new Image();
+            img0.src = "images/PT_anim0000.gif";
+            
+            var img1 = new Image();
+            img1.src = "images/PT_anim0001.gif";
+            
+            var img2 = new Image();
+            img2.src = "images/PT_anim0002.gif";
+            
+            var img3 = new Image();
+            img3.src = "images/PT_anim0003.gif";
+            
+            var i = 1;
+            var nImg = 4; //The number of images.
+            
+            function animate()
+            {
+                document.images[0].src = eval("img" + i).src;
+                i++;
+                if(i == nImg) i = 0;
+            }
+        </script>
+    </head>
+    
+    <body>
+        <a href="javascript:animate();">
+            <img src="images/PT_anim0002.gif" alt="Click to change image">
+        </a>
+        <h1>Click the Image</h1>
+    </body>
+</html>

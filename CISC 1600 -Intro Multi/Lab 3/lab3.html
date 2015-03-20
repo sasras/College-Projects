@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <script type="text/javascript">
+            var GAME_SPEED = 1000/60; //This is the game rate or screen refresh rate
+            /*Position of Center for which is x and y*/
+            var x = 100; 
+            var y = 75;
+            var radius = 25; // Radius of circle
+            
+            
+            var leftKey = false;
+            var rightKey = false;
+            var upKey = false;
+            var downKey = false;
+            var spaceKey =false;
+            
+            window.onload = function()
+            {
+                c = document.getElementById("myCanvas");
+                c.width = window.innerWidth*0.9;
+                c.height = window.innerHeight*0.9;
+                window.setInterval("draw()", GAME_SPEED);
+            }
+            
+            document.onkeyup = function(event)
+            {
+                switch(event.keyCode)
+                {
+                    case 37: leftKey = false;
+                        break;
+                    case 39: rightKey = false;
+                        break;
+                    case 38: upKey = false;
+                        break;
+                    case 40: downKey = false;
+                        break;
+                    case 32: spaceKey = false;
+                        break;
+                }
+            }
+            
+            document.onkeydown = function(event)
+            {
+                switch(event.keyCode)
+                {
+                    case 37: leftKey = true;
+                        break;
+                    case 39: rightKey = true;
+                        break;
+                    case 38: upKey = true;
+                        break;
+                    case 40: downKey = true;
+                        break;
+                    case 32: spaceKey = true;
+                        break;
+                }
+            }
+            
+            /*The Draw function draws the rectangle.*/
+            function draw()
+            {
+                if(leftKey == true)
+                {
+                    x--;
+                }
+                if(rightKey == true)
+                {
+                    x++;
+                }
+                if(upKey == true)
+                {
+                    y--;
+                }
+                if(downKey == true)
+                {
+                    y++;
+                }
+                if(spaceKey == true)
+                {
+                    radius++;
+                }
+                
+                var c = document.getElementById("myCanvas");
+                var cntxt = c.getContext("2d");
+                
+                /*Circle filled here*/
+                
+                cntxt.arc(x , y, radius, 0, 2 * Math.PI);
+                cntxt.fillStyle = "#FF0000";
+                cntxt.fill();
+                //cntxt.stroke();
+            }
+        </script>
+    </head>
+    
+    <body>
+        <canvas id="myCanvas" style="border: 5px solid #000000;">
+            Your browser does not support this cavans element.
+        </canvas>
+    </body>
+    
+</html>
