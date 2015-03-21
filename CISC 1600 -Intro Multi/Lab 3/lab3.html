@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html>
-    
+    <!--
+    Shawn Singh
+    CISC 1600
+    Prof. Munoz
+    Spring 2015
+    Lab 3 - Basic Animattions in Javascript
+
+    The following code is testing how to use the cavans tag of html5 to do 
+    animations and drawings. There are two shapes being drawn using two 
+    different sets of keys to draw them. Each shape also has its own 
+    color.
+-->
     <head>
         <script type="text/javascript">
+            
             var GAME_SPEED = 1000/60; //This is the game rate or screen refresh rate
-            /*Position of Center for which is x and y*/
+            /*Position of Rectangle and its size.*/
             var x = 100; 
             var y = 75;
-            var radius = 25; // Radius of circle
+            var sideLength = 10;
             
+            /*Position for the Circle and its size*/
+            var circX = 700;
+            var circY = 75;
+            var radius = 5; // Radius of circle
             
+            //The arrrow keys
             var leftKey = false;
             var rightKey = false;
             var upKey = false;
             var downKey = false;
             var spaceKey =false;
             
+            //The w, a, s, d and z keys
+            var wKey = false;
+            var aKey = false;
+            var sKey = false;
+            var dKey = false;
+            var zKey = false; //Use z key to zoom for the circle
+            
+            /*As the page loads create a window in which the cavavas will be.*/
             window.onload = function()
             {
                 c = document.getElementById("myCanvas");
@@ -24,6 +49,8 @@
                 window.setInterval("draw()", GAME_SPEED);
             }
             
+            /*Function checks if key is up or not pressed yet and sets the boolean
+            value.*/
             document.onkeyup = function(event)
             {
                 switch(event.keyCode)
@@ -38,9 +65,24 @@
                         break;
                     case 32: spaceKey = false;
                         break;
+                    //The other keys for the cricle
+                    case 87: wKey = false;
+                        break;
+                    case 65: aKey = false;
+                        break;
+                    case 83: sKey = false;
+                        break;
+                    case 68: dKey = false;
+                        break;
+                    case 88: xKey = false;
+                        break;
+                    case 90: zKey = false;
+                        break;
                 }
             }
             
+            /*Functiion checks if key is down or pressed and sets the boolean
+            value*/
             document.onkeydown = function(event)
             {
                 switch(event.keyCode)
@@ -55,13 +97,30 @@
                         break;
                     case 32: spaceKey = true;
                         break;
+                     //The other keys for the cricle
+                    case 87: wKey = true;
+                        break;
+                    case 65: aKey = true;
+                        break;
+                    case 83: sKey = true;
+                        break;
+                    case 68: dKey = true;
+                        break;
+                    case 88: xKey = true;
+                        break;
+                    case 90: zKey = true;
+                        break;
                 }
             }
             
-            /*The Draw function draws the rectangle.*/
+            /*The Draw function draws the rectangle or circle
+            based on the boolean values of their respective keys.By 
+            pressing the keys it will allow the the shapes to be used to
+            draw on the canvas*/
             function draw()
             {
-                if(leftKey == true)
+                //Rectangle Keys
+               if(leftKey == true)
                 {
                     x--;
                 }
@@ -79,24 +138,50 @@
                 }
                 if(spaceKey == true)
                 {
+                    sideLength++;
+                }
+                
+                //Circle Keys
+                if(aKey == true)
+                {
+                    circX--;
+                }
+                if(dKey == true)
+                {
+                    circX++;
+                }
+                if(wKey == true)
+                {
+                    circY--;
+                }
+                if(sKey == true)
+                {
+                    circY++;
+                }
+                if(zKey == true)
+                {
                     radius++;
                 }
                 
-                var c = document.getElementById("myCanvas");
+                var c = document.getElementById("myCanvas"); 
                 var cntxt = c.getContext("2d");
                 
-                /*Circle filled here*/
+                //Draw and Color Rectangle.
+                cntxt.fillStyle = "#FF0000"; //Red
+                cntxt.fillRect(x,y, sideLength, sideLength);
                 
-                cntxt.arc(x , y, radius, 0, 2 * Math.PI);
-                cntxt.fillStyle = "#FF0000";
+                /*Draw and Color Circle.*/
+                cntxt.beginPath(); //Need begin path so circle is redrawn.
+                cntxt.arc(circX , circY, radius, 0, 2 * Math.PI);
+                cntxt.fillStyle = "#00de3c";
                 cntxt.fill();
-                //cntxt.stroke();
             }
         </script>
+        
     </head>
     
     <body>
-        <canvas id="myCanvas" style="border: 5px solid #000000;">
+        <canvas id="myCanvas" style="border: 5px solid #0014ff;">
             Your browser does not support this cavans element.
         </canvas>
     </body>
