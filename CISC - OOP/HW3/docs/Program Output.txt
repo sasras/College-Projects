@@ -1,0 +1,4 @@
+Employee name: Smith ID: 6543 SSN: 123-44-7890 salary: 45500.0 compensation:     875.00
+Employee name: Chavez ID: 7833 SSN: 349-08-4912 salary: 52175.0 compensation:    3203.37 bonus: 2200.0
+Employee name: Kennedy ID: 5422 SSN: 556-34-0998 salary: 0.0 compensation:    1233.75 hourly wage: 23.5 number of hours: 52.5
+Employee name: Murphy ID: 3636 SSN: 909-23-0154 salary: 23000.0 compensation:     461.06 commission rate: 150.0 quantity sold: 0.125
